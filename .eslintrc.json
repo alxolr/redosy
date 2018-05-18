@@ -1,0 +1,10 @@
+{
+  "extends": "airbnb-base",
+  "rules": {
+    "complexity": [
+      "error",
+      4
+    ],
+    "no-use-before-define": "off"
+  }
+}

@@ -10,6 +10,7 @@
   "author": "Alexandru Olaru",
   "license": "ISC",
   "dependencies": {
+    "esprima": "^4.0.0",
     "safe-regex": "^1.1.0"
   },
   "devDependencies": {

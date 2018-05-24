@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
-const readline = require('readline');
 const safe = require('safe-regex');
+const esprima = require('esprima');
+const assert = require('assert');
 
 const dir = process.argv[2] || '.';
-const regex = /\/((?![*+?])(?:[^\r\n\[/\\]|\\.|\[(?:[^\r\n\]\\]|\\.)*\])+)\/((?:g(?:im?|mi?)?|i(?:gm?|mg?)?|m(?:gi?|ig?)?)?)/;
-const ignoreFolders = ['node_modules', '.git', '.cfignore'];
+const ignoreFolders = ['node_modules', '.git', '.cfignore', 'bower_components'];
 
 fs.readdir(dir, handleDirectories(dir));
 
@@ -33,24 +33,21 @@ function handleDescriptor(dirPath) {
 }
 
 function handleJsFile(filePath) {
-  let index = 0;
+  fs.readFile(filePath, 'utf8', handleFile);
 
-  const rl = readline.createInterface({
-    input: fs.createReadStream(filePath),
-  });
+  function handleFile(err, data) {
+    assert.ifError(err);
+    esprima.tokenize(data, { loc: true, range: true }, handleToken);
 
-  rl.on('line', handleLine);
-
-  function handleLine(line) {
-    index += 1;
-
-    const match = line.match(regex);
-    if (match) {
-      const candidat = match[0];
-      if (!safe(candidat)) {
-        console.log('\n', filePath, 'line', index);
-        console.log(candidat, 'is vulnerable\n');
+    function handleToken(node) {
+      if (node.type === 'RegularExpression') {
+        if (!safe(node.value)) {
+          console.log('\n', filePath, 'line', node.loc.start.line, 'column', node.loc.start.column);
+          console.log(node.value);
+        }
       }
     }
   }
 }
+
+process.on('uncaughtException', () => { });

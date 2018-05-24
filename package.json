@@ -6,12 +6,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "Regex",
+    "Denial of service"
+  ],
   "author": "Alexandru Olaru",
   "license": "ISC",
   "dependencies": {
     "esprima": "^4.0.0",
     "safe-regex": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alxolr/redosy.git"
+  },
+  "bin": {
+    "redosy": "node index.js"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

@@ -5,6 +5,8 @@
       "error",
       4
     ],
-    "no-use-before-define": "off"
+    "no-console": "off",
+    "no-use-before-define": "off",
+    "no-lonely-if": "off"
   }
 }

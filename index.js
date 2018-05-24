@@ -4,8 +4,15 @@ const safe = require('safe-regex');
 const esprima = require('esprima');
 const assert = require('assert');
 
+const ignoreFolders = [
+  'node_modules',
+  '.git',
+  '.cfignore',
+  'bower_components',
+];
+
 const dir = process.argv[2] || '.';
-const ignoreFolders = ['node_modules', '.git', '.cfignore', 'bower_components'];
+let vulnerabilities = 0;
 
 fs.readdir(dir, handleDirectories(dir));
 
@@ -44,6 +51,7 @@ function handleJsFile(filePath) {
         if (!safe(node.value)) {
           console.log('\n', filePath, 'line', node.loc.start.line, 'column', node.loc.start.column);
           console.log(node.value);
+          vulnerabilities += 1;
         }
       }
     }
@@ -51,3 +59,11 @@ function handleJsFile(filePath) {
 }
 
 process.on('uncaughtException', () => { });
+
+process.on('beforeExit', () => {
+  if (vulnerabilities) {
+    console.log('\nWas found', vulnerabilities, 'vulnerabilities');
+    process.exit(1);
+  }
+});
+

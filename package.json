@@ -21,7 +21,7 @@
     "url": "git+https://github.com/alxolr/redosy.git"
   },
   "bin": {
-    "redosy": "node index.js"
+    "redosy": "./bin/redosy"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

@@ -2,7 +2,7 @@
 
 const DirectoryScanner = require('../../lib/directory-scanner');
 const assert = require('assert');
-const { Writable } = require('stream');
+const { Readable, Writable } = require('stream');
 const { EventEmitter } = require('events');
 const path = require('path');
 

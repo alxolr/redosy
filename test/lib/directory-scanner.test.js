@@ -54,7 +54,7 @@ describe('DirectoryScanner', () => {
 
     scanner.scan(path.join(__dirname, '../', '../'))
       .on('end', () => {
-        assert.deepEqual(files, 8);
+        assert.deepEqual(files, 9);
         next();
       })
       .pipe(new Writable({

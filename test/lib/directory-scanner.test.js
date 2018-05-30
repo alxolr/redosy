@@ -46,7 +46,8 @@ describe('DirectoryScanner', () => {
         'node_modules',
         '.git',
         'directory-scanner.js'
-      ]
+      ],
+      extensions: [],
     });
 
     let files = 0;
@@ -62,5 +63,32 @@ describe('DirectoryScanner', () => {
           done();
         }
       }));
+  });
+
+  it('should permit to extract only specific file extensions', (next) => {
+    const options = {
+      ignore: [
+        'node_modules',
+        '.git'
+      ],
+      extensions: [
+        '.js',
+      ],
+    };
+    let files = 0;
+
+    const scanner = new DirectoryScanner(options);
+    scanner.scan(path.join(__dirname, '../', '../'))
+      .on('end', () => {
+        assert.equal(files, 3);
+        next();
+      })
+      .pipe(new Writable({
+        write(chunk, enc, done) {
+          files += 1;
+          done();
+        }
+      }));
+
   });
 });

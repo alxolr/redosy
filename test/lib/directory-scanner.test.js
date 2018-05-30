@@ -38,6 +38,29 @@ describe('DirectoryScanner', () => {
           done();
         }
       }));
+  });
 
+  it('should be able to ignore folders and files', (next) => {
+    const scanner = new DirectoryScanner({
+      ignore: [
+        'node_modules',
+        '.git',
+        'directory-scanner.js'
+      ]
+    });
+
+    let files = 0;
+
+    scanner.scan(path.join(__dirname, '../', '../'))
+      .on('end', () => {
+        assert.deepEqual(files, 8);
+        next();
+      })
+      .pipe(new Writable({
+        write(chunk, enc, done) {
+          files += 1;
+          done();
+        }
+      }));
   });
 });

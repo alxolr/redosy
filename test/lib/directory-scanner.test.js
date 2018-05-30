@@ -4,6 +4,7 @@ const DirectoryScanner = require('../../lib/directory-scanner');
 const assert = require('assert');
 const { Writable } = require('stream');
 const { EventEmitter } = require('events');
+const path = require('path');
 
 describe('DirectoryScanner', () => {
   it('should exist the DirectoryScanner instance of EventEmitter', () => {
@@ -16,12 +17,27 @@ describe('DirectoryScanner', () => {
     const directory = new DirectoryScanner();
     const writable = new Writable({ write() { } });
     directory
-      .scan()
+      .scan(__dirname)
       .on('end', () => next())
       .pipe(writable);
   });
 
   it('should scan all the folders from a specified directory and push the paths', (next) => {
     const scanner = new DirectoryScanner();
+    const actual = [];
+    const expected = [__filename];
+
+    scanner.scan(path.join(__dirname, '../'))
+      .on('end', () => {
+        assert.deepEqual(actual, expected);
+        next();
+      })
+      .pipe(new Writable({
+        write(chunk, enc, done) {
+          actual.push(chunk.toString());
+          done();
+        }
+      }));
+
   });
 });

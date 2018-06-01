@@ -1,12 +1,3 @@
-const DirectoryScanner = require('./lib/directory-scanner');
-
-const scanner = new DirectoryScanner({
-  ignore: [
-    'node_modules',
-    '.git'
-  ],
-  extensions: ['.js']
-});
-
-scanner.scan(process.argv[2])
-  .pipe(process.stdout);
+const firstVulnerableRegex = /([a-zA-Z]+)*/i;
+const secondVulnerableRegex = /([a-zA-Z]+)*/i;
+const safeRegex = /[a-zA-Z]{5}/i;

@@ -1,8 +1,8 @@
-/* environment mocha */
+/* eslint-env mocha */
 
 const DirectoryScanner = require('../../lib/directory-scanner');
 const assert = require('assert');
-const { Readable, Writable } = require('stream');
+const { Writable } = require('stream');
 const { EventEmitter } = require('events');
 const path = require('path');
 
@@ -89,6 +89,5 @@ describe('DirectoryScanner', () => {
           done();
         },
       }));
-
   });
 });

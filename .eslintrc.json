@@ -3,11 +3,12 @@
   "rules": {
     "complexity": [
       "error",
-      4
+      5
     ],
     "no-console": "off",
     "no-use-before-define": "off",
     "no-lonely-if": "off",
-    "strict": "off"
+    "strict": "off",
+    "max-len": ["error", 120]
   }
 }

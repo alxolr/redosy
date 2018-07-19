@@ -1,4 +1,4 @@
-/* env mocha */
+/* eslint-env mocha */
 
 const RedosScanner = require('../../lib/redos-scanner');
 const DirectoryScanner = require('../../lib/directory-scanner');
@@ -8,7 +8,7 @@ const assert = require('assert');
 
 const directoryScanner = new DirectoryScanner({
   ignore: ['node_modules', '.git', 'test'],
-  extensions: ['.js']
+  extensions: ['.js'],
 });
 
 const dir = path.join(__dirname, '../', '../');
@@ -27,7 +27,7 @@ describe('RedosScanner', () => {
       .pipe(redosScanner)
       .on('finish', () => {
         next();
-      })
+      });
   });
 
   it('should tokenize the file and get the regex nodes', (next) => {
@@ -36,7 +36,7 @@ describe('RedosScanner', () => {
       .scan(dir)
       .pipe(redosScanner)
       .on('finish', () => {
-        assert.equal(Object.keys(redosScanner.issues).length, 1)
+        assert.equal(Object.keys(redosScanner.issues).length, 1);
         next();
       });
   });

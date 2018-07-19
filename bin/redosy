@@ -19,9 +19,11 @@ directoryScanner
   .on('finish', () => {
     const keys = Object.keys(redosyScanner.issues);
     if (keys.length) {
-      process.exit(1);
+      redosyScanner.displayIssues();
+
+      return process.exit(1);
     }
 
-    process.exit(0);
+    return process.exit(0);
   });
 

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha --recursive"
+    "test": "nyc mocha --recursive",
+    "lint": "eslint . --fix"
   },
   "keywords": [
     "Regex",

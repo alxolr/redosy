@@ -36,7 +36,7 @@ describe('DirectoryScanner', () => {
         write(chunk, enc, done) {
           actual.push(chunk.toString());
           done();
-        }
+        },
       }));
   });
 
@@ -45,7 +45,7 @@ describe('DirectoryScanner', () => {
       ignore: [
         'node_modules',
         '.git',
-        'directory-scanner.js'
+        'directory-scanner.js',
       ],
       extensions: [],
     });
@@ -54,14 +54,14 @@ describe('DirectoryScanner', () => {
 
     scanner.scan(path.join(__dirname, '../', '../'))
       .on('end', () => {
-        assert.deepEqual(files, 11);
+        assert.deepEqual(files, 10);
         next();
       })
       .pipe(new Writable({
         write(chunk, enc, done) {
           files += 1;
           done();
-        }
+        },
       }));
   });
 
@@ -69,7 +69,7 @@ describe('DirectoryScanner', () => {
     const options = {
       ignore: [
         'node_modules',
-        '.git'
+        '.git',
       ],
       extensions: [
         '.js',
@@ -87,7 +87,7 @@ describe('DirectoryScanner', () => {
         write(chunk, enc, done) {
           files += 1;
           done();
-        }
+        },
       }));
 
   });

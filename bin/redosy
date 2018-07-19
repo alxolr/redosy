@@ -8,7 +8,7 @@ const directoryScanner = new DirectoryScanner({
     'node_modules',
     '.git',
   ],
-  extensions: ['.js']
+  extensions: ['.js'],
 });
 
 const redosyScanner = new RedosyScanner();

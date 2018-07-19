@@ -1,4 +1,4 @@
-/* environment mocha */
+/* env mocha */
 
 const RedosScanner = require('../../lib/redos-scanner');
 const DirectoryScanner = require('../../lib/directory-scanner');

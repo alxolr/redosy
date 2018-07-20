@@ -11,7 +11,16 @@ npm install -g redosy
 ## Usage
 
 ```bash
-redosy ./source/to/your/project/folder
+redosy ./path/to/your/project/folder
 ```
 
+## Result
 
+```bash
+Redosy scans your application for Regex Denial of Service errors.
+Was found the following issues
+
+index.js
+/([a-zA-Z]+)*/i on line 3 column 29
+/([a-zA-Z]+)*/i on line 4 column 30
+```

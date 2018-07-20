@@ -2,6 +2,9 @@
 
 const DirectoryScanner = require('../lib/directory-scanner');
 const RedosyScanner = require('../lib/redos-scanner');
+const color = require('colors-cli/safe');
+
+const success = color.green;
 
 const directoryScanner = new DirectoryScanner({
   ignore: [
@@ -13,6 +16,8 @@ const directoryScanner = new DirectoryScanner({
 
 const redosyScanner = new RedosyScanner();
 
+console.log('Redosy scans your application for Regex Denial of Service errors.');
+
 directoryScanner
   .scan(process.argv[2])
   .pipe(redosyScanner)
@@ -23,6 +28,8 @@ directoryScanner
 
       return process.exit(1);
     }
+
+    console.log(success('No issues was found'));
 
     return process.exit(0);
   });

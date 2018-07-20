@@ -1,6 +1,6 @@
 {
   "name": "redosy",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,7 @@
   "author": "Alexandru Olaru",
   "license": "ISC",
   "dependencies": {
+    "colors-cli": "^1.0.17",
     "esprima": "^4.0.0",
     "safe-regex": "^1.1.0"
   },

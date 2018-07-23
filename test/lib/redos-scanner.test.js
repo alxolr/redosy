@@ -48,7 +48,18 @@ describe('RedosScanner', () => {
       .pipe(redosScanner)
       .on('finish', () => {
         assert.equal(Object.keys(redosScanner.issues).length, 1);
-        redosScanner.displayIssues();
+        next();
+      });
+  });
+
+  it('should ignore a disabled redosy line', (next) => {
+    const redosScanner = new RedosScanner();
+    directoryScanner
+      .scan(dir)
+      .pipe(redosScanner)
+      .on('finish', () => {
+        const key = path.resolve(path.resolve(__dirname, '../', '../', 'index.js'));
+        assert.equal(redosScanner.issues[key].length, 2);
         next();
       });
   });

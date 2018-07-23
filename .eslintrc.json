@@ -3,7 +3,7 @@
   "rules": {
     "complexity": [
       "error",
-      5
+      7
     ],
     "no-console": "off",
     "no-use-before-define": "off",

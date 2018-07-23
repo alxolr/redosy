@@ -24,3 +24,10 @@ index.js
 /([a-zA-Z]+)*/i on line 3 column 29
 /([a-zA-Z]+)*/i on line 4 column 30
 ```
+
+## Ignore a specific regex
+
+```javascript
+// redosy-disable-next-line
+const ignoreVulnerableRegex = /([a-zA-Z]+)*/i;
+```

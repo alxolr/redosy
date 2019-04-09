@@ -46,6 +46,7 @@ describe('DirectoryScanner', () => {
         'node_modules',
         '.git',
         'directory-scanner.js',
+        'safe-regexp.js'
       ],
       extensions: [],
     });
@@ -80,7 +81,7 @@ describe('DirectoryScanner', () => {
     const scanner = new DirectoryScanner(options);
     scanner.scan(path.join(__dirname, '../', '../'))
       .on('end', () => {
-        assert.equal(files, 5);
+        assert.equal(files, 6);
         next();
       })
       .pipe(new Writable({

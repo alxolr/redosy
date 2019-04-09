@@ -15,11 +15,12 @@ const directoryScanner = new DirectoryScanner({
 });
 
 const redosyScanner = new RedosyScanner();
+const path = process.argv[2] || '.';
 
 console.log('Redosy scans your application for Regex Denial of Service errors.');
 
 directoryScanner
-  .scan(process.argv[2])
+  .scan(path)
   .pipe(redosyScanner)
   .on('finish', () => {
     const keys = Object.keys(redosyScanner.issues);
@@ -33,4 +34,3 @@ directoryScanner
 
     return process.exit(0);
   });
-
